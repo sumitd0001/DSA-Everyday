@@ -32,6 +32,7 @@ class SinglyLinkedList {
         void insertInternal(const T& val, const int& pos);
         void deleteInternal(const int& pos);
         Node<T>* reverse(Node<T>* node);
+        //void reverse(Node<T>* node);
 
     private :
         Node<T>* _head;
@@ -192,13 +193,26 @@ void SinglyLinkedList<T>::print() {
     cout<<"\n";
 }
 
+/*
+Reverse:
+*/
+
 template<typename T>
 Node<T>* SinglyLinkedList<T>::reverse(Node<T>* node) {
+    if (!node || !node->next) return node;
 
+    Node<T>* rest = reverse(node->next);
+    cout<<"Returning : node->data : "<<node->data<<" node->next->data : "<<node->next->data<<"\n";
+    node->next->next = node;
+    node->next = nullptr;
+    if(rest)
+        cout<<"Return : rest->data "<<rest->data<<"\n";
+    return rest;
 }
 
 template<typename T>
 void SinglyLinkedList<T>::reverse() {
+    _head = reverse(_head);
 }
 
 int main () {

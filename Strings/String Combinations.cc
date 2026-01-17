@@ -1,26 +1,36 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void combinations (string& str, int i, int pos, int end, string& temp) {
+/*
+                     "abc"
+            a                       " "
+    ab            a" "          b            " "
+abc     ab" "  ac     a" "    bc  b" "    c       " " //All the combinatons present at leaf node
 
-    if(pos == end) return;
+Imagine it like a tree
 
-    if(pos < end) {
-        for(int j = pos; j<=i; ++j) {
-            cout<<temp[j];
-        }
+There are 2 cases
+    Take a or do not take a (a      " ")
+    Now for each of those case, take the next i.e., b, or do not take b (ab a" " ""b " "" ")
+    now for these 4 cases, take next (c) one or do not tkae next(c) one (8 cases, 2^3 cases)
+*/
+
+void combinations (string str, int i, string temp) {
+    if(i == str.length()) {
+        cout<<temp<<"\n";
+        return;
     }
-    temp[pos] = str[i];
-    combinations(str, i+1, pos+1, end, temp);
-    combinations(str, i, pos+1, end, temp);
+
+    combinations(str, i+1, temp + str[i]);
+    combinations(str, i+1, temp);
 }
 
 int main () {
 
-    string str{"abcdef"};
+    string str{"abc"};
     string temp{""};
 
-    combinations(str, 0, 0, str.length()-1, temp);
+    combinations(str, 0, temp);
 
     return 0;
 }

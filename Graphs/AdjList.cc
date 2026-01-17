@@ -105,6 +105,20 @@ int main () {
     isCycle = detect_cycle_directed_graph_DFS(adj_directed_cycle);
     cout<<"Cycle Exists Directed Graph DFS : "<<isCycle<<"\n";
 
+    unordered_map<int, unordered_set<int>> adj_directed_cycle_2;
+    addEdge_Directed_Graph(adj_directed_cycle_2, 1, 2);
+    addEdge_Directed_Graph(adj_directed_cycle_2, 2, 3);
+    addEdge_Directed_Graph(adj_directed_cycle_2, 2, 4);
+    addEdge_Directed_Graph(adj_directed_cycle_2, 3, 4);
+    addEdge_Directed_Graph(adj_directed_cycle_2, 4, 2);
+    addEdge_Directed_Graph(adj_directed_cycle_2, 4, 5);
+    cout<<"Topological Sort adj_directed_cycle_2 (cycle exists) : \n";
+    topological_sort_DFS(adj_directed_cycle_2);
+    isCycle = detect_cycle_DAG_Kahns_Algo(adj_directed_cycle_2);
+    cout<<"Cycle Exists Directed Graph BFS (Kahn's algo): 2nd "<<isCycle<<"\n";
+    isCycle = detect_cycle_directed_graph_DFS(adj_directed_cycle_2);
+    cout<<"Cycle Exists Directed Graph DFS : 2nd "<<isCycle<<"\n";
+
     unordered_map<int, set<pair<int, int>>> adj_directed_weighted;
     addEdge_directed_weighted(adj_directed_weighted, 1, 2, 2);
     addEdge_directed_weighted(adj_directed_weighted, 1, 5, 1);
